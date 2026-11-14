@@ -2117,17 +2117,57 @@ body.track-brother .stat-num{color:var(--sky);}
             <p style="text-align:center" data-lang="en">Welcome — enter your Student ID to view your profile.</p>
             <p class="ar" style="text-align:center" data-lang="ar" dir="rtl">مرحبًا — أدخل رقم الطالب الخاص بك لعرض ملفك.</p>
             <form id="portalLoginForm">
-              <label data-lang="en">Student ID</label>
-              <label class="ar" data-lang="ar" dir="rtl">رقم الطالب</label>
-              <input type="text" id="portalIdInput" placeholder="e.g. TAA26-001" autocomplete="off" required>
-              <div id="portalError" class="portal-error" data-lang="en">Student ID not found. Please check and try again.</div>
-              <div class="portal-error ar" id="portalErrorAr" data-lang="ar" dir="rtl">لم يتم العثور على رقم الطالب. يرجى التحقق والمحاولة مرة أخرى.</div>
-              <button type="submit" class="btn btn-gold ripple btn-wide" style="margin-top:16px" data-lang="en">Login</button>
-              <button type="submit" class="btn btn-gold ripple ar btn-wide" style="margin-top:16px" data-lang="ar" dir="rtl">تسجيل الدخول</button>
+
+  <label data-lang="en">Student ID</label>
+  <label class="ar" data-lang="ar" dir="rtl">رقم الطالب</label>
+  <input
+    type="text"
+    id="portalIdInput"
+    placeholder="e.g. TAA26-001"
+    autocomplete="off"
+    required
+  >
+
+  <label data-lang="en">Surname</label>
+  <label class="ar" data-lang="ar" dir="rtl">اسم العائلة</label>
+  <input
+    type="text"
+    id="portalSurnameInput"
+    placeholder="e.g. Olugbon"
+    autocomplete="family-name"
+    required
+  >
+
+  <label data-lang="en">Gmail Address</label>
+  <label class="ar" data-lang="ar" dir="rtl">البريد الإلكتروني</label>
+  <input
+    type="email"
+    id="portalEmailInput"
+    placeholder="example@gmail.com"
+    autocomplete="email"
+    pattern="[A-Za-z0-9._%+-]+@gmail\.com"
+    required
+  >
+
+  <div id="portalError" class="portal-error" data-lang="en">
+    Your details do not match our student records. Please check and try again.
+  </div>
+
+  <div class="portal-error ar" id="portalErrorAr" data-lang="ar" dir="rtl">
+    البيانات غير متطابقة مع سجلات الطلاب. يرجى التحقق والمحاولة مرة أخرى.
+  </div>
+
+  <button type="submit" class="btn btn-gold ripple btn-wide"
+    style="margin-top:16px" data-lang="en">
+    Login
+  </button>
+
+  <button type="submit" class="btn btn-gold ripple ar btn-wide"
+    style="margin-top:16px" data-lang="ar" dir="rtl">
+    تسجيل الدخول
+  </button>
+
             </form>
-            <p class="form-note" style="text-align:center;margin-top:14px" data-lang="en">Trouble logging in? Visit <a href="#" data-nav="support" style="color:var(--emerald-700);text-decoration:underline">Support</a>.</p>
-            <p class="form-note ar" style="text-align:center;margin-top:14px" data-lang="ar" dir="rtl">تواجه مشكلة؟ تواصل مع <a href="#" data-nav="support" style="color:var(--emerald-700);text-decoration:underline">الدعم</a>.</p>
-          </div>
 
           <div id="portalProfile" class="portal-profile" style="display:none">
             <div class="portal-profile-head">
@@ -2610,34 +2650,50 @@ var HUB_PASSWORD = "Tadhkiratupass1";
   var portalLoginBox = document.getElementById('portalLogin');
   var portalProfileBox = document.getElementById('portalProfile');
   if(portalLoginForm){
-    portalLoginForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      var idInput = document.getElementById('portalIdInput');
-      var raw = idInput.value.trim().toUpperCase().replace(/\s+/g,'');
-      var name = STUDENT_ROSTER[raw];
-      var errEn = document.getElementById('portalError');
-      var errAr = document.getElementById('portalErrorAr');
-      if(name){
-        errEn.classList.remove('show'); errAr.classList.remove('show');
-        document.getElementById('portalName').textContent = name;
-        document.getElementById('portalIdValue').textContent = raw;
-        document.getElementById('portalFullName').textContent = name;
-        portalLoginBox.style.display = 'none';
-        portalProfileBox.style.display = 'block';
-      } else {
-        errEn.classList.add('show'); errAr.classList.add('show');
-        portalLoginBox.classList.remove('shake'); void portalLoginBox.offsetWidth;
-        portalLoginBox.classList.add('shake');
-      }
-    });
-  }
-  var portalLogoutBtn = document.getElementById('portalLogoutBtn');
-  if(portalLogoutBtn){
-    portalLogoutBtn.addEventListener('click', function(){
-      portalProfileBox.style.display = 'none';
-      portalLoginBox.style.display = 'block';
-      document.getElementById('portalIdInput').value = '';
-    });
+  portalLoginForm.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var idInput = document.getElementById('portalIdInput');
+    var surnameInput = document.getElementById('portalSurnameInput');
+    var emailInput = document.getElementById('portalEmailInput');
+
+    var raw = idInput.value.trim().toUpperCase().replace(/\s+/g,'');
+    var surname = surnameInput.value.trim().toLowerCase();
+    var email = emailInput.value.trim().toLowerCase();
+
+    var name = STUDENT_ROSTER[raw];
+
+    var errEn = document.getElementById('portalError');
+    var errAr = document.getElementById('portalErrorAr');
+
+    var registeredSurname = name
+      ? name.trim().split(/\s+/).pop().toLowerCase()
+      : '';
+
+    var validGmail = /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
+
+    if(name && surname === registeredSurname && validGmail){
+
+      errEn.classList.remove('show');
+      errAr.classList.remove('show');
+
+      document.getElementById('portalName').textContent = name;
+      document.getElementById('portalIdValue').textContent = raw;
+      document.getElementById('portalFullName').textContent = name;
+
+      portalLoginBox.style.display = 'none';
+      portalProfileBox.style.display = 'block';
+
+    } else {
+
+      errEn.classList.add('show');
+      errAr.classList.add('show');
+
+      portalLoginBox.classList.remove('shake');
+      void portalLoginBox.offsetWidth;
+      portalLoginBox.classList.add('shake');
+    }
+  });
   }
 
   // ---------- Hero parallax ----------

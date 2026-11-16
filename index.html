@@ -2207,63 +2207,82 @@ body.track-brother .stat-num{color:var(--sky);}
           <p class="form-note" style="text-align:center;margin-top:16px" data-lang="en">Lightweight portal preview — full account-based tracking is planned as the academy grows.</p>
           <p class="form-note ar" style="text-align:center;margin-top:16px" data-lang="ar" dir="rtl">نظرة أولية على البوابة، وسيتم تفعيل متابعة كاملة عبر الحسابات لاحقًا مع نمو الأكاديمية.</p>
         </div>
+<div class="tab-panel" id="tab-attendance">
+  <form class="attendance-form" data-formtype="Attendance">
 
-        <div class="tab-panel" id="tab-attendance">
-          <form class="attendance-form" data-formtype="Attendance">
-            <div class="form-grid">
-              <div class="field"><label data-lang="en">Full Name</label><label class="ar" data-lang="ar" dir="rtl">الاسم الكامل</label><input type="text" name="Name" required></div>
-              <div class="field"><label data-lang="en">Class PIN</label><label class="ar" data-lang="ar" dir="rtl">رمز الحصة</label><input type="text" name="Class PIN" placeholder="Given by your teacher" required></div>
-              <div class="field"><label data-lang="en">Halqoh / Class</label><label class="ar" data-lang="ar" dir="rtl">الحلقة / الحصة</label>
-                <select name="Halqoh" id="attendanceHalqoh" required>
-                  <option value="">Select your ḥalaqah / class</option>
-                  <option data-wa="2349138373991">Halqoh Aliy</option>
-                  <option data-wa="2348121224287">Halqoh Uthman</option>
-                  <option data-wa="2347076770100">Halqoh Abu Bakar</option>
-                  <option data-wa="2348147889719">Halqoh Ibn Abaas</option>
-                  <option data-wa="2348142453177">Halqoh Hamzah</option>
-                  <option data-wa="2349163838697">Halqoh Umar</option>
-                  <option data-wa="2348136315444">Hadith Class</option>
-                  <option data-wa="2349163828420">Mutoon Class</option>
-                  <option data-wa="2349134520324">Arabic Class</option>
-                </select>
-              </div>
-              <div class="field"><label data-lang="en">Date</label><label class="ar" data-lang="ar" dir="rtl">التاريخ</label><input type="date" name="Date" required></div>
-              <div class="field"><label data-lang="en">Track</label><label class="ar" data-lang="ar" dir="rtl">المسار</label>
-                <select name="Track"><option>Qur'an Memorisation</option><option>Hadith</option><option>Tafsir</option><option>Mutoon</option><option>Arabic</option></select>
-              </div>
-              <div class="field full">
-                <label data-lang="en">Days Attended This Week</label><label class="ar" data-lang="ar" dir="rtl">أيام الحضور هذا الأسبوع</label>
-                <div class="day-select-grid">
-                  <label class="day-chip"><input type="checkbox" name="Days" value="Sunday"><span data-lang="en">Sun</span><span class="ar" data-lang="ar">الأحد</span></label>
-                  <label class="day-chip"><input type="checkbox" name="Days" value="Monday"><span data-lang="en">Mon</span><span class="ar" data-lang="ar">الإثنين</span></label>
-                  <label class="day-chip"><input type="checkbox" name="Days" value="Tuesday"><span data-lang="en">Tue</span><span class="ar" data-lang="ar">الثلاثاء</span></label>
-                  <label class="day-chip"><input type="checkbox" name="Days" value="Wednesday"><span data-lang="en">Wed</span><span class="ar" data-lang="ar">الأربعاء</span></label>
-                  <label class="day-chip"><input type="checkbox" name="Days" value="Thursday"><span data-lang="en">Thu</span><span class="ar" data-lang="ar">الخميس</span></label>
-                  <label class="day-chip"><input type="checkbox" name="Days" value="Friday"><span data-lang="en">Fri</span><span class="ar" data-lang="ar">الجمعة</span></label>
-                  <label class="day-chip"><input type="checkbox" name="Days" value="Saturday"><span data-lang="en">Sat</span><span class="ar" data-lang="ar">السبت</span></label>
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-gold ripple" style="margin-top:18px" data-lang="en">Submit Attendance</button>
-            <button type="submit" class="btn btn-gold ripple ar" style="margin-top:18px" data-lang="ar" dir="rtl">تسجيل الحضور</button>
-            <div class="form-success"><span data-lang="en">Attendance recorded — thank you.</span><span class="ar" data-lang="ar" dir="rtl">تم تسجيل الحضور، شكرًا لك.</span></div>
-          </form>
-        </div>
+    <div class="form-grid">
 
-        <div class="tab-panel" id="tab-complaints">
-          <form class="complaints-form" data-formtype="Complaint">
-            <div class="form-grid">
-              <div class="field"><label data-lang="en">Full Name</label><label class="ar" data-lang="ar" dir="rtl">الاسم الكامل</label><input type="text" name="Name" required></div>
-              <div class="field"><label data-lang="en">Email or WhatsApp</label><label class="ar" data-lang="ar" dir="rtl">البريد أو واتساب</label><input type="text" name="Contact" required></div>
-              <div class="field full"><label data-lang="en">Your Message</label><label class="ar" data-lang="ar" dir="rtl">رسالتك</label><textarea name="Message" required></textarea></div>
-            </div>
-            <button type="submit" class="btn btn-gold ripple" style="margin-top:18px" data-lang="en">Send to DOS</button>
-            <button type="submit" class="btn btn-gold ripple ar" style="margin-top:18px" data-lang="ar" dir="rtl">إرسال إلى الإدارة</button>
-            <div class="form-success"><span data-lang="en">Received — the Director of Studies will follow up.</span><span class="ar" data-lang="ar" dir="rtl">تم الاستلام، وسيتواصل معك مدير الدراسات.</span></div>
-          </form>
-        </div>
+      <div class="field">
+        <label>Student Name</label>
+        <input type="text" name="Name"
+          id="attendanceStudentName" readonly required>
       </div>
-    </section>
+
+      <div class="field">
+        <label>Student ID</label>
+        <input type="text" name="Student ID"
+          id="attendanceStudentId" readonly required>
+      </div>
+
+      <div class="field full">
+        <label>Halqah / Class</label>
+        <select name="Halqoh" id="attendanceHalqoh" required>
+          <option value="">Select your class</option>
+
+          <option value="Halqoh Aliy" data-wa="2348081184587">Halqoh Aliy</option>
+          <option value="Halqoh Uthman" data-wa="2348081184587">Halqoh Uthman</option>
+          <option value="Halqoh Abu Bakar" data-wa="2348081184587">Halqoh Abu Bakar</option>
+
+          <option value="Halqoh Ibn Abbas" data-wa="2349134520324">Halqoh Ibn Abbas</option>
+          <option value="Halqoh Hamzah" data-wa="2349134520324">Halqoh Hamzah</option>
+          <option value="Halqoh Umar" data-wa="2349134520324">Halqoh Umar</option>
+
+          <option value="Hadith Class" data-wa="2348020688973">Hadith Class</option>
+          <option value="Mutoon Class" data-wa="2348020688973">Mutoon Class</option>
+          <option value="Arabic Class" data-wa="2348020688973">Arabic Class</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Attendance Date</label>
+        <input type="date" name="Date" id="attendanceDate" required>
+      </div>
+
+      <div class="field">
+        <label>Subject</label>
+        <select name="Subject" required>
+          <option value="">Select subject</option>
+          <option>Qur'an Memorisation</option>
+          <option>Tajweed</option>
+          <option>Tafseer</option>
+          <option>Hadith</option>
+          <option>Mutoon</option>
+          <option>Arabic</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label>Attendance Status</label>
+        <select name="Attendance Status" required>
+          <option value="">Select status</option>
+          <option value="Present">Present</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button type="submit"
+      class="btn btn-gold ripple"
+      style="margin-top:18px">
+      Submit Attendance
+    </button>
+
+    <div class="form-success">
+      Attendance prepared. Continue to WhatsApp to send it.
+    </div>
+
+  </form>
+</div>
 
     <!-- ================= APPLY / REGISTRATION ================= -->
     <section class="page" id="page-apply">

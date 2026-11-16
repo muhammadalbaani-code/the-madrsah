@@ -2706,13 +2706,21 @@ function setTab(tab){
       errEn.classList.remove('show');
       errAr.classList.remove('show');
 
-      document.getElementById('portalName').textContent = name;
-      document.getElementById('portalIdValue').textContent = raw;
-      document.getElementById('portalFullName').textContent = name;
+  
+currentLoggedInStudent = {
+  id: raw,
+  name: name
+};
 
-      portalLoginBox.style.display = 'none';
-      portalProfileBox.style.display = 'block';
+document.getElementById('portalName').textContent = name;
+document.getElementById('portalIdValue').textContent = raw;
+document.getElementById('portalFullName').textContent = name;
 
+document.getElementById('attendanceStudentName').value = name;
+document.getElementById('attendanceStudentId').value = raw;
+
+portalLoginBox.style.display = 'none';
+portalProfileBox.style.display = 'block';
     } else {
 
       errEn.classList.add('show');

@@ -2805,6 +2805,7 @@ portalProfileBox.style.display = 'block';
       hubPasswordInput.value = '';
     });
   }
+  
 
   // ---------- Language toggle ----------
   var htmlRoot = document.getElementById('htmlRoot');
@@ -2951,53 +2952,84 @@ portalProfileBox.style.display = 'block';
   }
 
   document.querySelectorAll('.attendance-form, .complaints-form, .apply-form').forEach(function(f){
-    f.addEventListener('submit', function(e){
-      e.preventDefault();
-      var success = f.querySelector('.form-success');
-      var submitBtns = f.querySelectorAll('button[type="submit"]');
-      submitBtns.forEach(function(b){ b.disabled = true; b.style.opacity = '.6'; });
-      var data = new FormData(f);
-      var formType = f.dataset.formtype || 'Submission';
-      var waNumber = f.dataset.whatsapp || '';
-      if(!waNumber){
-        var halqohSelect = f.querySelector('#attendanceHalqoh');
-        if(halqohSelect && halqohSelect.selectedOptions[0]){
-          waNumber = halqohSelect.selectedOptions[0].dataset.wa || '';
-        }
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    if(f.classList.contains('attendance-form') && !currentLoggedInStudent){
+      alert('Please log in before submitting attendance.');
+      return;
+    }
+
+    var success = f.querySelector('.form-success');
+    var submitBtns = f.querySelectorAll('button[type="submit"]');
+
+    submitBtns.forEach(function(b){
+      b.disabled = true;
+      b.style.opacity = '.6';
+    });
+
+    var data = new FormData(f);
+    var formType = f.dataset.formtype || 'Submission';
+    var waNumber = f.dataset.whatsapp || '';
+
+    var halqohSelect = f.querySelector('#attendanceHalqoh');
+
+    if(!waNumber && halqohSelect && halqohSelect.selectedOptions[0]){
+      waNumber = halqohSelect.selectedOptions[0].dataset.wa || '';
+    }
+
+    var entriesForWa = Array.from(data.entries());
+
+    data.append('_subject', 'Academy ' + formType + ' Submission');
+    data.append('_captcha', 'false');
+    data.append('_template', 'table');
+
+    var waWindow = null;
+
+    if(waNumber){
+      var summary = buildWhatsAppSummary(formType, entriesForWa);
+      var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(summary);
+      waWindow = window.open(waUrl, '_blank');
+    }
+
+    fetch('https://formsubmit.co/ajax/' + ACADEMY_EMAIL, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data
+    })
+    .then(function(response){
+      if(!response.ok) throw new Error('Submission failed');
+
+      if(success){
+        success.classList.add('show');
       }
-      data.append('_subject', 'Academy ' + formType + ' Submission');
-      data.append('_captcha', 'false');
-      data.append('_template', 'table');
-      var entriesForWa = Array.from(data.entries()).filter(function(pair){ return pair[0].indexOf('_') !== 0; });
-      fetch('https://formsubmit.co/ajax/' + ACADEMY_EMAIL, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: data
-      })
-      .then(function(){
-        if(success){ success.classList.add('show'); }
-        if(waNumber){
-          var summary = buildWhatsAppSummary(formType, entriesForWa);
-          var waUrl = 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(summary);
-          window.open(waUrl, '_blank', 'noopener');
-        }
-        f.reset();
-      })
-      .catch(function(){
-        if(success){
-          success.classList.add('show');
-          success.querySelectorAll('span').forEach(function(s){
-            s.textContent = s.getAttribute('data-lang')==='ar'
-              ? 'تعذّر الإرسال، حاول عبر واتساب من فضلك.'
-              : "Couldn't send — please try again or use WhatsApp.";
-          });
-        }
-      })
-      .finally(function(){
-        submitBtns.forEach(function(b){ b.disabled = false; b.style.opacity = ''; });
+
+      f.reset();
+
+      if(f.classList.contains('attendance-form') && currentLoggedInStudent){
+        document.getElementById('attendanceStudentName').value = currentLoggedInStudent.name;
+        document.getElementById('attendanceStudentId').value = currentLoggedInStudent.id;
+      }
+    })
+    .catch(function(){
+      if(success){
+        success.classList.add('show');
+        success.querySelectorAll('span').forEach(function(s){
+          s.textContent = s.getAttribute('data-lang')==='ar'
+            ? 'تعذّر الإرسال، حاول عبر واتساب من فضلك.'
+            : "Couldn't send — please try again.";
+        });
+      }
+    })
+    .finally(function(){
+      submitBtns.forEach(function(b){
+        b.disabled = false;
+        b.style.opacity = '';
       });
     });
   });
+});
+      
 
   // ---------- Animated stat counters ----------
   function animateStats(){

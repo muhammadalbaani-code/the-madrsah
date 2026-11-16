@@ -2734,6 +2734,41 @@ portalProfileBox.style.display = 'block';
   }
 
   // ---------- Hero parallax ----------
+  // ---------- Student logout ----------
+var portalLogoutBtn = document.getElementById('portalLogoutBtn');
+
+if(portalLogoutBtn){
+  portalLogoutBtn.addEventListener('click', function(){
+
+    currentLoggedInStudent = null;
+
+    portalProfileBox.style.display = 'none';
+    portalLoginBox.style.display = 'block';
+
+    portalLoginForm.reset();
+
+    document.getElementById('attendanceStudentName').value = '';
+    document.getElementById('attendanceStudentId').value = '';
+
+    var attendanceForm = document.querySelector('.attendance-form');
+    if(attendanceForm) attendanceForm.reset();
+
+    setTab('portal');
+
+  });
+}
+
+// ---------- Automatic attendance date ----------
+var attendanceDateInput = document.getElementById('attendanceDate');
+
+if(attendanceDateInput){
+  var today = new Date();
+  var localDate = new Date(
+    today.getTime() - today.getTimezoneOffset() * 60000
+  ).toISOString().slice(0,10);
+
+  attendanceDateInput.value = localDate;
+  }
   var heroLattice = document.querySelector('.hero-lattice');
   var heroEl = document.querySelector('.hero');
   if(heroLattice && heroEl){

@@ -1129,6 +1129,132 @@ body.track-brother .stat-num{color:var(--sky);}
 }
 
 :focus-visible{outline:2px solid var(--gold-500);outline-offset:2px;}
+  /* MEET THE FOUNDER FLOATING BUTTON */
+.founder-float {
+    position: fixed;
+    bottom: 22px;
+    right: 18px;
+    z-index: 9998;
+    background: linear-gradient(135deg, #C9A227, #e5c45d);
+    color: #0A0E18;
+    border: none;
+    border-radius: 30px;
+    padding: 14px 20px;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: .5px;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0,0,0,.3);
+}
+
+.founder-float:hover {
+    transform: translateY(-3px);
+}
+
+/* MOVE WHATSAPP TO THE LEFT */
+.wa-float {
+    right: auto !important;
+    left: 18px !important;
+}
+
+/* FULL SCREEN FOUNDER PAGE */
+#founderFullPage {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: #0A0E18;
+    color: #F4EEDF;
+    overflow-y: auto;
+    padding: 30px 18px 70px;
+}
+
+.founder-page-inner {
+    max-width: 900px;
+    margin: auto;
+}
+
+.founder-close {
+    position: sticky;
+    top: 10px;
+    float: right;
+    background: #C9A227;
+    color: #0A0E18;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.founder-heading {
+    text-align: center;
+    padding: 65px 10px 35px;
+    border-bottom: 1px solid #C9A227;
+}
+
+.founder-heading h1 {
+    color: #C9A227;
+    font-size: clamp(25px, 5vw, 42px);
+    margin-bottom: 10px;
+}
+
+.founder-heading h3 {
+    color: #F4EEDF;
+    font-size: 17px;
+}
+
+.founder-heading p {
+    color: #C9A227;
+}
+
+.founder-section {
+    margin: 35px 0;
+    line-height: 1.9;
+}
+
+.founder-section h2 {
+    color: #C9A227;
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.founder-section p {
+    margin-bottom: 16px;
+    color: #e8e3d7;
+    font-size: 15px;
+}
+
+.founder-quote {
+    border-left: 4px solid #C9A227;
+    padding: 20px;
+    margin: 35px 0;
+    background: rgba(201,162,39,.09);
+    font-size: 19px;
+    font-style: italic;
+}
+
+.founder-signature {
+    text-align: right;
+    color: #C9A227;
+    margin-top: 35px;
+    line-height: 1.8;
+}
+
+@media(max-width:600px) {
+    .founder-float {
+        right: 12px;
+        bottom: 18px;
+        padding: 12px 14px;
+        font-size: 11px;
+    }
+
+    .wa-float {
+        left: 12px !important;
+        bottom: 18px !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -3093,6 +3219,26 @@ if(attendanceDateInput){
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
+  // OPEN FOUNDER PAGE
+const founderButton = document.getElementById("meetFounderFloat");
+const founderPage = document.getElementById("founderFullPage");
+const founderClose = document.getElementById("closeFounderPage");
+
+if (founderButton && founderPage) {
+    founderButton.addEventListener("click", function () {
+        founderPage.style.display = "block";
+        document.body.style.overflow = "hidden";
+        founderPage.scrollTop = 0;
+    });
+}
+
+// CLOSE FOUNDER PAGE
+if (founderClose && founderPage) {
+    founderClose.addEventListener("click", function () {
+        founderPage.style.display = "none";
+        document.body.style.overflow = "";
+    });
+  }
 </script>
 <template id="founderBioTemplate">
   <h2 class="tracking-in-expand" style="margin-bottom:4px">Hudhyfah Abdulganiy Oloje</h2>

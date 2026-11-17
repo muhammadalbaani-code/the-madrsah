@@ -3219,7 +3219,7 @@ if(attendanceDateInput){
 
   document.getElementById('year').textContent = new Date().getFullYear();
 })();
-  // OPEN FOUNDER PAGE
+  
 const founderButton = document.getElementById("meetFounderFloat");
 const founderPage = document.getElementById("founderFullPage");
 const founderClose = document.getElementById("closeFounderPage");
@@ -3665,5 +3665,29 @@ if (founderClose && founderPage) {
 
     </div>
 </div>
+        <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const founderButton = document.getElementById("meetFounderFloat");
+    const founderPage = document.getElementById("founderFullPage");
+    const founderClose = document.getElementById("closeFounderPage");
+
+    if (founderButton && founderPage) {
+        founderButton.addEventListener("click", function () {
+            founderPage.style.display = "block";
+            document.body.style.overflow = "hidden";
+            founderPage.scrollTop = 0;
+        });
+    }
+
+    if (founderClose && founderPage) {
+        founderClose.addEventListener("click", function () {
+            founderPage.style.display = "none";
+            document.body.style.overflow = "";
+        });
+    }
+
+});
+        </script>
 </body>
 </html>

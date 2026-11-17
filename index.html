@@ -2335,14 +2335,21 @@ body.track-brother .stat-num{color:var(--sky);}
           <p class="form-note" style="text-align:center;margin-top:16px" data-lang="en">Lightweight portal preview — full account-based tracking is planned as the academy grows.</p>
           <p class="form-note ar" style="text-align:center;margin-top:16px" data-lang="ar" dir="rtl">نظرة أولية على البوابة، وسيتم تفعيل متابعة كاملة عبر الحسابات لاحقًا مع نمو الأكاديمية.</p>
         </div>
+        
 <div class="tab-panel" id="tab-attendance">
-  <form class="attendance-form" data-formtype="Attendance">
+  <form class="attendance-form" data-formtype="Weekly Attendance">
+
+    <h2 style="margin-bottom:8px">Weekly Attendance Register</h2>
+    <p class="form-note" style="margin-bottom:22px">
+      Select the week and record your attendance for each day.
+      Submit only one weekly record.
+    </p>
 
     <div class="form-grid">
 
       <div class="field">
         <label>Student Name</label>
-        <input type="text" name="Name"
+        <input type="text" name="Student Name"
           id="attendanceStudentName" readonly required>
       </div>
 
@@ -2371,10 +2378,102 @@ body.track-brother .stat-num{color:var(--sky);}
         </select>
       </div>
 
-      <div class="field">
-        <label>Attendance Date</label>
-        <input type="date" name="Date" id="attendanceDate" required>
+      <div class="field full">
+        <label>Week Commencing (Monday)</label>
+        <input type="date" name="Week Commencing" required>
       </div>
+
+    </div>
+
+    <h3 style="margin:25px 0 8px">Weekly Attendance Record</h3>
+
+    <p class="form-note" style="margin-bottom:15px">
+      Select the correct status for each day. Leave days without
+      classes as "No Class".
+    </p>
+
+    <div style="display:grid;gap:12px">
+
+      <div class="field">
+        <label>Monday</label>
+        <select name="Monday Attendance" required>
+          <option value="No Class" selected>No Class</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+          <option value="Excused">Excused</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Tuesday</label>
+        <select name="Tuesday Attendance" required>
+          <option value="No Class" selected>No Class</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+          <option value="Excused">Excused</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Wednesday</label>
+        <select name="Wednesday Attendance" required>
+          <option value="No Class" selected>No Class</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+          <option value="Excused">Excused</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Thursday</label>
+        <select name="Thursday Attendance" required>
+          <option value="No Class" selected>No Class</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+          <option value="Excused">Excused</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Friday</label>
+        <select name="Friday Attendance" required>
+          <option value="No Class" selected>No Class</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+          <option value="Excused">Excused</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Saturday</label>
+        <select name="Saturday Attendance" required>
+          <option value="No Class" selected>No Class</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+          <option value="Excused">Excused</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Sunday</label>
+        <select name="Sunday Attendance" required>
+          <option value="No Class" selected>No Class</option>
+          <option value="Present">Present</option>
+          <option value="Absent">Absent</option>
+          <option value="Late">Late</option>
+          <option value="Excused">Excused</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="form-grid" style="margin-top:22px">
 
       <div class="field">
         <label>Subject</label>
@@ -2389,28 +2488,36 @@ body.track-brother .stat-num{color:var(--sky);}
         </select>
       </div>
 
+      <div class="field">
+        <label>Teacher's Name</label>
+        <input type="text" name="Teacher" placeholder="Teacher's name">
+      </div>
+
       <div class="field full">
-        <label>Attendance Status</label>
-        <select name="Attendance Status" required>
-          <option value="">Select status</option>
-          <option value="Present">Present</option>
-        </select>
+        <label>Lesson / Topic Covered</label>
+        <input type="text" name="Lesson Covered"
+          placeholder="Enter the lesson covered during the week">
+      </div>
+
+      <div class="field full">
+        <label>Additional Remarks</label>
+        <textarea name="Remarks" rows="4"
+          placeholder="Additional information (optional)"></textarea>
       </div>
 
     </div>
 
-    <button type="submit"
-      class="btn btn-gold ripple"
-      style="margin-top:18px">
-      Submit Attendance
+    <button type="submit" class="btn btn-gold ripple"
+      style="margin-top:20px">
+      Submit Weekly Attendance
     </button>
 
     <div class="form-success">
-      Attendance prepared. Continue to WhatsApp to send it.
+      Weekly attendance submitted successfully.
     </div>
 
   </form>
-</div>
+  </div>
 
     <!-- ================= APPLY / REGISTRATION ================= -->
     <section class="page" id="page-apply">

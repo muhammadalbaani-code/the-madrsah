@@ -3277,6 +3277,27 @@ if(attendanceDateInput){
       alert('Please log in before submitting attendance.');
       return;
     }
+    if(f.classList.contains('attendance-form')) {
+  var dailyRecords = [
+    'Monday Attendance',
+    'Tuesday Attendance',
+    'Wednesday Attendance',
+    'Thursday Attendance',
+    'Friday Attendance',
+    'Saturday Attendance',
+    'Sunday Attendance'
+  ];
+
+  var hasPresent = dailyRecords.some(function(day) {
+    var field = f.querySelector('[name="' + day + '"]');
+    return field && field.value === 'Present';
+  });
+
+  if(!hasPresent) {
+    alert('Please mark at least one day as Present.');
+    return;
+  }
+ }
 
     var success = f.querySelector('.form-success');
     var submitBtns = f.querySelectorAll('button[type="submit"]');
